@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 	"net"
-        "log"
+        "strings"
 )
 
 var dnsTypeValueByName = map[string]uint16 {
@@ -18,6 +18,11 @@ var dnsTypeValueByName = map[string]uint16 {
 	"ptr": dns.TypePTR,
 	"soa": dns.TypeSOA,
 	"txt": dns.TypeTXT,
+}
+
+func printError(format string, a ...interface{}) {
+	fmt.Fprintf(os.Stderr, "dnsq: ERROR: ")
+	fmt.Fprintf(os.Stderr, format, a...)
 }
 
 func printUsage() {
@@ -34,8 +39,12 @@ func main() {
 		printUsage()
 		return
 	}
-	q_type, _ := dnsTypeValueByName[os.Args[1]]
-	// FIXME: Die on unknown type name
+	q_type, ok := dnsTypeValueByName[strings.ToLower(os.Args[1])]
+	if !ok {
+		ret = 100
+		printError("Unknown type: %v\n", os.Args[1])
+		return
+	}
 	q_name := os.Args[2]
 	ns := os.Args[3]
 
@@ -47,11 +56,11 @@ func main() {
 
 	r, _, err := c.Exchange(m, net.JoinHostPort(ns, "53"))
 	if r == nil {
-		log.Fatalf("ERROR: FIXME: %s\n", err.Error())
+		printError("FIXME: %s\n", err.Error())
 	}
 
 	if r.Rcode != dns.RcodeSuccess {
-		log.Fatalf("ERROR: FIXME: Print error detailss\n")
+		printError("FIXME: Print error detailss\n")
 	}
 	// Stuff must be in the answer section
 	for _, a := range r.Answer {
