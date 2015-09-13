@@ -17,12 +17,12 @@ var dnsTypeValueByName = map[string]uint16 {
 	"ns": dns.TypeNS,
 	"ptr": dns.TypePTR,
 	"soa": dns.TypeSOA,
+	"txt": dns.TypeTXT,
 }
 
 func printUsage() {
 	const usage = "dnsq: Usage: dnsq TYPE NAME SERVER\n"
 	os.Stderr.Write([]byte(usage))
-	os.Exit(100)
 }
 
 func main() {
@@ -30,9 +30,12 @@ func main() {
 	defer func() { os.Exit(ret) }()
 
 	if len(os.Args) != 4 {
+		ret = 100
 		printUsage()
+		return
 	}
 	q_type, _ := dnsTypeValueByName[os.Args[1]]
+	// FIXME: Die on unknown type name
 	q_name := os.Args[2]
 	ns := os.Args[3]
 
@@ -44,7 +47,7 @@ func main() {
 
 	r, _, err := c.Exchange(m, net.JoinHostPort(ns, "53"))
 	if r == nil {
-		log.Fatalf("*** error: %s\n", err.Error())
+		log.Fatalf("ERROR: FIXME: %s\n", err.Error())
 	}
 
 	if r.Rcode != dns.RcodeSuccess {
