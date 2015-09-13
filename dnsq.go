@@ -21,7 +21,7 @@ var dnsTypeValueByName = map[string]uint16 {
 }
 
 func printError(format string, a ...interface{}) {
-	fmt.Fprintf(os.Stderr, "dnsq: ERROR: ")
+	fmt.Fprint(os.Stderr, "dnsq: ERROR: ")
 	fmt.Fprintf(os.Stderr, format, a...)
 }
 
@@ -59,10 +59,48 @@ func main() {
 		printError("FIXME: %s\n", err.Error())
 	}
 
-	if r.Rcode != dns.RcodeSuccess {
-		printError("FIXME: Print error detailss\n")
+	// FIXME: How to get a response size?
+	fmt.Printf("%d+%d+%d+%d records",
+		len(r.Question),
+		len(r.Answer),
+		len(r.Ns),
+		len(r.Extra),
+	)
+	if r.Response {
+		fmt.Print(", response")
 	}
-	// Stuff must be in the answer section
+	//if r.FIXME {
+	//	fmt.Print(", weird op")
+	//}
+	if r.Authoritative {
+		fmt.Print(", authoritative")
+	}
+	if r.Truncated {
+		fmt.Print(", truncated")
+	}
+	//if r.FIXME {
+	//	fmt.Print(", weird rd")
+	//}
+	//if r.FIXME {
+	//	fmt.Print(", weird ra")
+	//}
+	switch r.Rcode {
+	case dns.RcodeSuccess:
+		fmt.Print(", noerror")
+	case dns.RcodeNameError:
+		fmt.Print(", nxdomain")
+	case dns.RcodeNotImplemented:
+		fmt.Print(", notimp")
+	case dns.RcodeRefused:
+		fmt.Print(", refused")
+	default:
+		fmt.Print(", weird rcode")
+	}
+	if r.Zero {
+		fmt.Print(", weird z")
+	}
+	fmt.Print("\n")
+
 	for _, a := range r.Answer {
 		fmt.Printf("%v\n", a)
 	}
