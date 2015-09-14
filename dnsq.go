@@ -10,12 +10,17 @@ import (
 
 var dnsTypeValueByName = map[string]uint16 {
 	"a": dns.TypeA,
+	"aaaa": dns.TypeAAAA,
 	"any": dns.TypeANY,
+	"axfe": dns.TypeAXFR,
 	"cname": dns.TypeCNAME,
 	"hinfo": dns.TypeHINFO,
+	"key": dns.TypeKEY,
 	"mx": dns.TypeMX,
 	"ns": dns.TypeNS,
 	"ptr": dns.TypePTR,
+	"rp": dns.TypeRP,
+	"sig": dns.TypeSIG,
 	"soa": dns.TypeSOA,
 	"txt": dns.TypeTXT,
 }
