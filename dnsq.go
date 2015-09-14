@@ -35,6 +35,11 @@ func printUsage() {
 	os.Stderr.Write([]byte(usage))
 }
 
+func dnsRRToString(rr dns.RR) string {
+	rr_s := strings.SplitN(rr.String(), "\t", 5)
+	return rr_s[0] + " " + rr_s[1] + " " + rr_s[3] + " " + rr_s[4]
+}
+
 func main() {
 	ret := 0
 	defer func() { os.Exit(ret) }()
@@ -112,15 +117,15 @@ func main() {
 		fmt.Printf("query: %v %s\n", rr.Qtype, rr.Name)
 	}
 	for _, rr := range r.Answer {
-		fmt.Printf("answer: %v\n", rr)
+		fmt.Printf("answer: %v\n", dnsRRToString(rr))
 		//h := rr.Header()
 		//fmt.Printf("answer: %v %v %s %s\n", h.Name, h.Ttl, dns.Type(h.Rrtype).String(), rr.RdataString())
 	}
 	for _, rr := range r.Ns {
-		fmt.Printf("authority: %v\n", rr)
+		fmt.Printf("authority: %v\n", dnsRRToString(rr))
 	}
 	for _, rr := range r.Extra {
-		fmt.Printf("additional: %v\n", rr)
+		fmt.Printf("additional: %v\n", dnsRRToString(rr))
 	}
 }
 
