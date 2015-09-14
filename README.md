@@ -1,4 +1,4 @@
-djbdns's dnsq(1) clone implemented in Golang
+djbdns's dnsq(1) and dnsqr(1) clone implemented in Golang
 ======================================================================
 
   * Copyright (C) 2015 SATOH Fumiyasu @ OSS Technology Corp., Japan
@@ -8,17 +8,19 @@ djbdns's dnsq(1) clone implemented in Golang
 What's this?
 ----------------------------------------------------------------------
 
-未完成。
+だいたい完成。
 
-How to build an native binary:
+How to build native binaries:
 
 ```console
 $ go build dnsq.go
+$ go build dnsqr.go
 ```
 
-How to build a Windows binary:
+How to build Windows binaries:
 
 ```console
 $ GOOS=windows go build dnsq.go
+$ GOOS=windows go build dnsqr.go
 ```
 

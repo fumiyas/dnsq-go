@@ -26,12 +26,12 @@ var dnsTypeValueByName = map[string]uint16 {
 }
 
 func printError(format string, a ...interface{}) {
-	fmt.Fprint(os.Stderr, "dnsq: ERROR: ")
+	fmt.Fprint(os.Stderr, "dnsqr: ERROR: ")
 	fmt.Fprintf(os.Stderr, format, a...)
 }
 
 func printUsage() {
-	const usage = "dnsq: Usage: dnsq TYPE NAME SERVER\n"
+	const usage = "dnsqr: Usage: dnsqr TYPE NAME [SERVER]\n"
 	os.Stderr.Write([]byte(usage))
 }
 
@@ -44,7 +44,7 @@ func main() {
 	ret := 0
 	defer func() { os.Exit(ret) }()
 
-	if len(os.Args) != 4 {
+	if len(os.Args) < 3 || len(os.Args) > 4 {
 		ret = 100
 		printUsage()
 		return
@@ -57,13 +57,24 @@ func main() {
 		return
 	}
 	q_name := os.Args[2]
-	ns := os.Args[3]
+
+	ns := "127.0.0.1"
+	if len(os.Args) == 4 {
+		ns = os.Args[3]
+	} else if ns_env := os.Getenv("DNSCACHEIP"); len(ns_env) > 0 {
+		ns = ns_env
+	} else {
+		config, err := dns.ClientConfigFromFile("/etc/resolv.conf")
+		if err == nil && len(config.Servers) > 0 {
+			ns = config.Servers[0]
+		}
+	}
 
 	c := new(dns.Client)
 
 	m := new(dns.Msg)
 	m.SetQuestion(dns.Fqdn(q_name), q_type)
-	m.RecursionDesired = false
+	m.RecursionDesired = true
 
 	fmt.Printf("%v %s:\n", q_type, q_name)
 
