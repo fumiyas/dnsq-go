@@ -1,28 +1,28 @@
 package main
 
 import (
-	"github.com/miekg/dns"
 	"fmt"
-	"os"
+	"github.com/miekg/dns"
 	"net"
-        "strings"
+	"os"
+	"strings"
 )
 
-var dnsTypeValueByName = map[string]uint16 {
-	"a": dns.TypeA,
-	"aaaa": dns.TypeAAAA,
-	"any": dns.TypeANY,
-	"axfe": dns.TypeAXFR,
+var dnsTypeValueByName = map[string]uint16{
+	"a":     dns.TypeA,
+	"aaaa":  dns.TypeAAAA,
+	"any":   dns.TypeANY,
+	"axfe":  dns.TypeAXFR,
 	"cname": dns.TypeCNAME,
 	"hinfo": dns.TypeHINFO,
-	"key": dns.TypeKEY,
-	"mx": dns.TypeMX,
-	"ns": dns.TypeNS,
-	"ptr": dns.TypePTR,
-	"rp": dns.TypeRP,
-	"sig": dns.TypeSIG,
-	"soa": dns.TypeSOA,
-	"txt": dns.TypeTXT,
+	"key":   dns.TypeKEY,
+	"mx":    dns.TypeMX,
+	"ns":    dns.TypeNS,
+	"ptr":   dns.TypePTR,
+	"rp":    dns.TypeRP,
+	"sig":   dns.TypeSIG,
+	"soa":   dns.TypeSOA,
+	"txt":   dns.TypeTXT,
 }
 
 func printError(format string, a ...interface{}) {
@@ -138,4 +138,3 @@ func main() {
 		fmt.Printf("additional: %v\n", dnsRRToString(rr))
 	}
 }
-
