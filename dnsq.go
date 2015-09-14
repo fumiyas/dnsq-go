@@ -54,6 +54,8 @@ func main() {
 	m.SetQuestion(dns.Fqdn(q_name), q_type)
 	m.RecursionDesired = false
 
+	fmt.Printf("%v %s:\n", q_type, q_name)
+
 	r, _, err := c.Exchange(m, net.JoinHostPort(ns, "53"))
 	if r == nil {
 		printError("FIXME: %s\n", err.Error())
@@ -69,21 +71,21 @@ func main() {
 	if r.Response {
 		fmt.Print(", response")
 	}
-	//if r.FIXME {
-	//	fmt.Print(", weird op")
-	//}
+	if r.Opcode == 0xF {
+		fmt.Print(", weird op")
+	}
 	if r.Authoritative {
 		fmt.Print(", authoritative")
 	}
 	if r.Truncated {
 		fmt.Print(", truncated")
 	}
-	//if r.FIXME {
-	//	fmt.Print(", weird rd")
-	//}
-	//if r.FIXME {
-	//	fmt.Print(", weird ra")
-	//}
+	if r.RecursionDesired {
+		fmt.Print(", weird rd")
+	}
+	if r.RecursionAvailable {
+		fmt.Print(", weird ra")
+	}
 	switch r.Rcode {
 	case dns.RcodeSuccess:
 		fmt.Print(", noerror")
@@ -101,8 +103,19 @@ func main() {
 	}
 	fmt.Print("\n")
 
-	for _, a := range r.Answer {
-		fmt.Printf("%v\n", a)
+	for _, rr := range r.Question {
+		fmt.Printf("query: %v %s\n", rr.Qtype, rr.Name)
+	}
+	for _, rr := range r.Answer {
+		fmt.Printf("answer: %v\n", rr)
+		//h := rr.Header()
+		//fmt.Printf("answer: %v %v %s %s\n", h.Name, h.Ttl, dns.Type(h.Rrtype).String(), rr.RdataString())
+	}
+	for _, rr := range r.Ns {
+		fmt.Printf("authority: %v\n", rr)
+	}
+	for _, rr := range r.Extra {
+		fmt.Printf("additional: %v\n", rr)
 	}
 }
 
