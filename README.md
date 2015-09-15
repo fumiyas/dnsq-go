@@ -24,3 +24,12 @@ $ GOOS=windows GOARCH=386 go build dnsq.go
 $ GOOS=windows GOARCH=386 go build dnsqr.go
 ```
 
+How to use
+----------------------------------------------------------------------
+
+```console
+$ dnsq a www.google.com a.root-servers.net
+$ dnsqr a www.osstech.co.jp
+$ dnsqr a www.xvideos.com your-full-service-resolver.example.jp
+```
+
