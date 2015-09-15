@@ -8,7 +8,17 @@ djbdns's dnsq(1) and dnsqr(1) clone implemented in Golang
 What's this?
 ----------------------------------------------------------------------
 
-だいたい完成。
+djbdns's dnsq(1) and dnsqr(1) clone implemented in Golang
+
+  * dnsq
+    * Sends a non-recursive DNS query to DNS contents server
+  * dnsqr
+    * Sends a recursive DNS query to DNS cache server
+  * djbdns
+    * http://cr.yp.to/djbdns.html
+
+How to build
+----------------------------------------------------------------------
 
 How to build native binaries:
 
@@ -30,6 +40,7 @@ How to use
 ```console
 $ dnsq a www.google.com a.root-servers.net
 $ dnsqr a www.osstech.co.jp
+$ dnsqr a www.xvideos.com 8.8.8.8
 $ dnsqr a www.xvideos.com your-full-service-resolver.example.jp
 ```
 
