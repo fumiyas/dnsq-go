@@ -17,7 +17,7 @@ $ go build dnsq.go
 $ go build dnsqr.go
 ```
 
-How to build Windows binaries:
+How to build Windows binaries on non-Windows environment (cross build):
 
 ```console
 $ GOOS=windows go build dnsq.go
