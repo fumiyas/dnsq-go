@@ -18,6 +18,13 @@ djbdns's dnsq(1) and dnsqr(1) clone implemented in Golang
   * djbdns
     * http://cr.yp.to/djbdns.html
 
+Download
+---------------------------------------------------------------------
+
+Binary files are here for Windows:
+
+  * https://github.com/fumiyas/dnsq-go/releases
+
 How to build
 ----------------------------------------------------------------------
 
