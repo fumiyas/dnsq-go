@@ -43,8 +43,8 @@ func printUsage() {
 }
 
 func dnsRRToString(rr dns.RR) string {
-	rr_s := strings.SplitN(rr.String(), "\t", 5)
-	return rr_s[0] + " " + rr_s[1] + " " + rr_s[3] + " " + rr_s[4]
+	parts := strings.SplitN(rr.String(), "\t", 5)
+	return parts[0] + " " + parts[1] + " " + parts[3] + " " + parts[4]
 }
 
 func main() {
@@ -57,22 +57,22 @@ func main() {
 		return
 	}
 
-	q_type, ok := dnsTypeValueByName[strings.ToLower(os.Args[1])]
+	qType, ok := dnsTypeValueByName[strings.ToLower(os.Args[1])]
 	if !ok {
 		ret = 100
 		printError("Unknown type: %v\n", os.Args[1])
 		return
 	}
-	q_name := os.Args[2]
+	qName := os.Args[2]
 	ns := os.Args[3]
 
 	c := new(dns.Client)
 
 	m := new(dns.Msg)
-	m.SetQuestion(dns.Fqdn(q_name), q_type)
+	m.SetQuestion(dns.Fqdn(qName), qType)
 	m.RecursionDesired = false
 
-	fmt.Printf("%v %s:\n", q_type, q_name)
+	fmt.Printf("%v %s:\n", qType, qName)
 
 	r, _, err := c.Exchange(m, net.JoinHostPort(ns, "53"))
 	if r == nil {

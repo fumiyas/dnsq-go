@@ -43,8 +43,8 @@ func printUsage() {
 }
 
 func dnsRRToString(rr dns.RR) string {
-	rr_s := strings.SplitN(rr.String(), "\t", 5)
-	return rr_s[0] + " " + rr_s[1] + " " + rr_s[3] + " " + rr_s[4]
+	parts := strings.SplitN(rr.String(), "\t", 5)
+	return parts[0] + " " + parts[1] + " " + parts[3] + " " + parts[4]
 }
 
 func main() {
@@ -57,19 +57,19 @@ func main() {
 		return
 	}
 
-	q_type, ok := dnsTypeValueByName[strings.ToLower(os.Args[1])]
+	qType, ok := dnsTypeValueByName[strings.ToLower(os.Args[1])]
 	if !ok {
 		ret = 100
 		printError("Unknown type: %v\n", os.Args[1])
 		return
 	}
-	q_name := os.Args[2]
+	qName := os.Args[2]
 
 	ns := "127.0.0.1"
 	if len(os.Args) == 4 {
 		ns = os.Args[3]
-	} else if ns_env := os.Getenv("DNSCACHEIP"); len(ns_env) > 0 {
-		ns = ns_env
+	} else if nsEnv := os.Getenv("DNSCACHEIP"); len(nsEnv) > 0 {
+		ns = nsEnv
 	} else {
 		config, err := dns.ClientConfigFromFile("/etc/resolv.conf")
 		if err == nil && len(config.Servers) > 0 {
@@ -80,10 +80,10 @@ func main() {
 	c := new(dns.Client)
 
 	m := new(dns.Msg)
-	m.SetQuestion(dns.Fqdn(q_name), q_type)
+	m.SetQuestion(dns.Fqdn(qName), qType)
 	m.RecursionDesired = true
 
-	fmt.Printf("%v %s:\n", q_type, q_name)
+	fmt.Printf("%v %s:\n", qType, qName)
 
 	r, _, err := c.Exchange(m, net.JoinHostPort(ns, "53"))
 	if r == nil {
