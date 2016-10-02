@@ -76,7 +76,7 @@ func main() {
 
 	r, _, err := c.Exchange(m, net.JoinHostPort(ns, "53"))
 	if r == nil {
-		printError("FIXME: %s\n", err.Error())
+		printError("DNS client: %s\n", err.Error())
 	}
 
 	// FIXME: How to get a response size?
