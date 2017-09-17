@@ -1,7 +1,7 @@
 djbdns's dnsq(1) and dnsqr(1) clone implemented in Golang
 ======================================================================
 
-  * Copyright (C) 2015-2016 SATOH Fumiyasu @ OSS Technology Corp., Japan
+  * Copyright (C) 2015-2017 SATOH Fumiyasu @ OSS Technology Corp., Japan
   * License: Go
   * Development home: <https://github.com/fumiyas/dnsq-go>
   * Author's home: <https://fumiyas.github.io/>
