@@ -31,6 +31,9 @@ var dnsTypeValueByName = map[string]uint16{
 	"soa":   dns.TypeSOA,
 	"txt":   dns.TypeTXT,
 	"srv":   dns.TypeSRV,
+	"dnskey":dns.TypeDNSKEY,
+	"ds":    dns.TypeDS,
+	"rrsig": dns.TypeRRSIG,
 }
 
 func printError(format string, a ...interface{}) {
