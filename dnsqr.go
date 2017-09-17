@@ -114,12 +114,12 @@ func main() {
 	if r.Truncated {
 		fmt.Print(", truncated")
 	}
-	if r.RecursionDesired {
-		fmt.Print(", weird rd")
-	}
-	if r.RecursionAvailable {
-		fmt.Print(", weird ra")
-	}
+//	if r.RecursionDesired {
+//		fmt.Print(", weird rd")
+//	}
+//	if r.RecursionAvailable {
+//		fmt.Print(", weird ra")
+//	}
 	switch r.Rcode {
 	case dns.RcodeSuccess:
 		fmt.Print(", noerror")
