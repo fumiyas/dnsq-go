@@ -52,3 +52,9 @@ $ dnsqr a www.xvideos.com 8.8.8.8
 $ dnsqr a www.xvideos.com your-full-service-resolver.example.jp
 ```
 
+TODO
+----------------------------------------------------------------------
+
+  * Add an option to enable/disable TCP, UDP, EDNS0 and so on
+  * Add an option to specify EDNS0 buffer size
+  * Support DNSSEC
