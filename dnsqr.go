@@ -86,6 +86,7 @@ func main() {
 	m := new(dns.Msg)
 	m.SetQuestion(dns.Fqdn(qName), qType)
 	m.RecursionDesired = true
+	m.SetEdns0(1480, true)
 
 	fmt.Printf("%v %s:\n", qType, qName)
 
