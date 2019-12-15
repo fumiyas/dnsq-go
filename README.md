@@ -1,7 +1,7 @@
 djbdns's dnsq(1) and dnsqr(1) clone implemented in Golang
 ======================================================================
 
-  * Copyright (C) 2015-2017 SATOH Fumiyasu @ OSS Technology Corp., Japan
+  * Copyright (C) 2015-2019 SATOH Fumiyasu @ OSS Technology Corp., Japan
   * License: Go
   * Development home: <https://github.com/fumiyas/dnsq-go>
   * Author's home: <https://fumiyas.github.io/>
@@ -25,21 +25,46 @@ Binary files are here for Windows:
 
   * https://github.com/fumiyas/dnsq-go/releases
 
+How to install
+----------------------------------------------------------------------
+
+```console
+$ go get github.com/fumiyas/dnsq-go/cmd/dnsq
+$ go get github.com/fumiyas/dnsq-go/cmd/dnsqr
+$ ls ~/go/bin/dnsq*
+...
+```
+
 How to build
 ----------------------------------------------------------------------
 
 How to build native binaries:
 
 ```console
-$ go build dnsq.go
-$ go build dnsqr.go
+$ git clone https://github.com/fumiyas/dnsq-go.git
+$ cd dnsq-go
+$ make
+...
+$ ls build/bin
+...
 ```
 
 How to build Windows binaries on non-Windows environment (cross build):
 
 ```console
-$ GOOS=windows GOARCH=386 go build dnsq.go
-$ GOOS=windows GOARCH=386 go build dnsqr.go
+$ GOOS=windows go build ./cmd/dnsq
+$ GOOS=windows go build ./cmd/dnsqr
+$ ls *.exe
+...
+```
+
+or:
+
+```console
+$ GOOS=windows GOARCH=386 go build ./cmd/dnsq
+$ GOOS=windows GOARCH=386 go build ./cmd/dnsqr
+$ ls *.exe
+...
 ```
 
 How to use
@@ -55,9 +80,6 @@ $ dnsqr a www.xvideos.com your-full-service-resolver.example.jp
 TODO
 ----------------------------------------------------------------------
 
-  * Support `go get https://github.com/fumiyas/dnsq-go/dnsq` and
-    `go get https://github.com/fumiyas/dnsq-go/dnsqr` to build
-    `dnsq` and `dnsqr` in the one-liner.
   * Add an option to enable/disable TCP, UDP, EDNS0 and so on.
   * Add an option to specify EDNS0 buffer size.
   * Support DNSSEC.
