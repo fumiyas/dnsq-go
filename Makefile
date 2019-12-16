@@ -13,8 +13,8 @@ dirs:
 	mkdir -p $(DIRS)
 	
 build: dirs
-	$(GO) build -o ./cmd/bin/dnsq ./cmd/dnsq
-	$(GO) build -o ./cmd/bin/dnsqr ./cmd/dnsqr
+	$(GO) build -o ./build/bin/dnsq ./cmd/dnsq
+	$(GO) build -o ./build/bin/dnsqr ./cmd/dnsqr
 
 cross: dirs
 	$(GOX) \
