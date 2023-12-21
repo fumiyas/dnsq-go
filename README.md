@@ -1,21 +1,21 @@
 djbdns's dnsq(1) and dnsqr(1) clone implemented in Golang
 ======================================================================
 
-  * Copyright (C) 2015-2023 SATOH Fumiyasu @ OSS Technology Corp., Japan
-  * License: Go
-  * Development home: <https://github.com/fumiyas/dnsq-go>
-  * Author's home: <https://fumiyas.github.io/>
+* Copyright (C) 2015-2023 SATOH Fumiyasu @ OSS Technology Corp., Japan
+* License: Go
+* Development home: <https://github.com/fumiyas/dnsq-go>
+* Author's home: <https://fumiyas.github.io/>
 
 What's this?
 ----------------------------------------------------------------------
 
-djbdns's dnsq(1) and dnsqr(1) clone implemented in Golang
+djbdns's `dnsq`(1) and `dnsqr`(1) clone implemented in Golang
 
-  * dnsq
+* `dnsq`
     * Sends a non-recursive DNS query to DNS contents server
-  * dnsqr
+* `dnsqr`
     * Sends a recursive DNS query to DNS cache server
-  * djbdns
+* djbdns
     * http://cr.yp.to/djbdns.html
 
 Download
@@ -80,6 +80,6 @@ $ dnsqr a www.xvideos.com your-full-service-resolver.example.jp
 TODO
 ----------------------------------------------------------------------
 
-  * Add an option to enable/disable TCP, UDP, EDNS0 and so on.
-  * Add an option to specify EDNS0 buffer size.
-  * Support DNSSEC.
+* Add an option to enable/disable TCP, UDP, EDNS0 and so on.
+* Add an option to specify EDNS0 buffer size.
+* Support DNSSEC.
